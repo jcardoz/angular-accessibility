@@ -15,6 +15,7 @@
  */
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 export interface ColorDialogData {
   color: string;
@@ -44,7 +45,8 @@ export class ColorPickerDialogComponent implements OnInit {
   ];
 
   // TODO: #11. Announce changes with LiveAnnouncer
-  constructor(public dialogRef: MatDialogRef<ColorPickerDialogComponent>) { }
+  constructor(public dialogRef: MatDialogRef<ColorPickerDialogComponent>,
+    private liveAnnouncer: LiveAnnouncer) { }
 
   ngOnInit(): void { }
 
@@ -54,6 +56,7 @@ export class ColorPickerDialogComponent implements OnInit {
     }
 
     // TODO: #11. Announce changes with LiveAnnouncer
+    this.liveAnnouncer.announce(`Select color: ${color}`);
     this.dialogRef.close();
   }
 
